@@ -23,6 +23,7 @@
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
 }
 
 #counter {
@@ -39,6 +40,7 @@ button {
   background-color: #007bff;
   color: white;
   cursor: pointer;
+  margin: 5px;
 }
 
 button:disabled {
@@ -50,27 +52,68 @@ button:hover:not(:disabled) {
   background-color: #0056b3;
 }
 
+.hidden {
+  display: none;
+}
+
+#message {
+  font-size: 1.5rem;
+  margin-top: 20px;
+  color: #ff4500;
+  animation: fadeIn 2s ease-in-out;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
   </style>
   <div class="counter-container">
     <h1>Click Counter</h1>
     <p id="counter">0</p>
+    <div id="message" class="hidden"></div>
     <button id="clickButton">Click Me</button>
+    <button id="resetButton">Reset</button>
   </div>
 <script>
   const counterElement = document.getElementById('counter');
 const clickButton = document.getElementById('clickButton');
+const resetButton = document.getElementById('resetButton');
+const messageElement = document.getElementById('message');
 
 let count = 0;
 
+// Click button functionality
 clickButton.addEventListener('click', () => {
   if (count < 50) {
     count++;
     counterElement.textContent = count;
 
     if (count === 50) {
-      clickButton.disabled = true; // Disable the button after reaching 50
+      clickButton.disabled = true;
+      resetButton.disabled = false;
+
+      // Display the message with animation
+      messageElement.textContent = "Jai Shree Ram Jai Hanuman";
+      messageElement.classList.remove('hidden');
     }
   }
+});
+
+// Reset button functionality
+resetButton.addEventListener('click', () => {
+  count = 0;
+  counterElement.textContent = count;
+  clickButton.disabled = false;
+  messageElement.classList.add('hidden');
 });
 
 </script>
