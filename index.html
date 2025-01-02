@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Counter</title>
+</head>
+<body>
+    <style>
+        body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.counter-container {
+  text-align: center;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#counter {
+  font-size: 2rem;
+  margin: 20px 0;
+  color: #333;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+    </style>
+  <div class="counter-container">
+    <h1>Counter</h1>
+    <p id="counter">0</p>
+    <button id="startButton">Start Counting</button>
+  </div>
+  <script>
+    const counterElement = document.getElementById('counter');
+const startButton = document.getElementById('startButton');
+
+startButton.addEventListener('click', () => {
+  let count = 0;
+
+  const interval = setInterval(() => {
+    count++;
+    counterElement.textContent = count;
+
+    if (count >= 50) {
+      clearInterval(interval);
+      startButton.disabled = false;
+    }
+  }, 100);
+
+  startButton.disabled = true;
+});
+
+  </script>
+</body>
+</html>
