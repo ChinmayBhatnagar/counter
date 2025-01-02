@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Counter</title>
+  <title>Click Counter</title>
 </head>
 <body>
-    <style>
-        body {
+  <style>
+    body {
   font-family: Arial, sans-serif;
   display: flex;
   justify-content: center;
@@ -41,36 +41,38 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
   background-color: #0056b3;
 }
 
-    </style>
+  </style>
   <div class="counter-container">
-    <h1>Counter</h1>
+    <h1>Click Counter</h1>
     <p id="counter">0</p>
-    <button id="startButton">Start Counting</button>
+    <button id="clickButton">Click Me</button>
   </div>
-  <script>
-    const counterElement = document.getElementById('counter');
-const startButton = document.getElementById('startButton');
+<script>
+  const counterElement = document.getElementById('counter');
+const clickButton = document.getElementById('clickButton');
 
-startButton.addEventListener('click', () => {
-  let count = 0;
+let count = 0;
 
-  const interval = setInterval(() => {
+clickButton.addEventListener('click', () => {
+  if (count < 50) {
     count++;
     counterElement.textContent = count;
 
-    if (count >= 50) {
-      clearInterval(interval);
-      startButton.disabled = false;
+    if (count === 50) {
+      clickButton.disabled = true; // Disable the button after reaching 50
     }
-  }, 100);
-
-  startButton.disabled = true;
+  }
 });
 
-  </script>
+</script>
 </body>
 </html>
