@@ -39,12 +39,13 @@
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      width: 300px;
+      width: 90%;
+      max-width: 400px;
       color: var(--bg-color);
     }
 
     #counter {
-      font-size: 2rem;
+      font-size: 2.5rem;
       margin: 20px 0;
     }
 
@@ -58,6 +59,8 @@
       cursor: pointer;
       margin: 5px;
       transition: background-color 0.3s ease;
+      width: 100%;
+      max-width: 150px;
     }
 
     button:disabled {
@@ -90,6 +93,7 @@
       border: none;
       padding: 10px 15px;
       border-radius: 5px;
+      font-size: 0.9rem;
     }
 
     @keyframes fadeIn {
@@ -102,6 +106,27 @@
         transform: scale(1);
       }
     }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+      }
+
+      #counter {
+        font-size: 2rem;
+      }
+
+      #themeToggle {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+      }
+
+      .counter-container {
+        padding: 15px;
+      }
+    }
   </style>
 </head>
 <body data-theme="light">
@@ -111,7 +136,7 @@
     <p id="counter">0</p>
     <div id="message" class="hidden"></div>
     <button id="clickButton">Click Me</button>
-    <button id="minusButton">-1</button>
+    <button id="minusButton" disabled>-1</button>
     <button id="resetButton" disabled>Reset</button>
   </div>
   <script>
@@ -139,6 +164,11 @@
         count++;
         counterElement.textContent = count;
 
+        // Enable minus button if count > 0
+        if (count > 0) {
+          minusButton.disabled = false;
+        }
+
         if (count === 50) {
           clickButton.disabled = true;
           minusButton.disabled = true;
@@ -156,6 +186,11 @@
       if (count > 0) {
         count--;
         counterElement.textContent = count;
+
+        // Disable minus button if count == 0
+        if (count === 0) {
+          minusButton.disabled = true;
+        }
       }
     });
 
@@ -165,7 +200,7 @@
         count = 0;
         counterElement.textContent = count;
         clickButton.disabled = false;
-        minusButton.disabled = false;
+        minusButton.disabled = true;
         resetButton.disabled = true;
         messageElement.classList.add('hidden');
       }
