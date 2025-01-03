@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,7 @@
       --text-color: #333;
       --button-bg: #007bff;
       --button-hover-bg: #0056b3;
-      --message-color: #ff4500;
+      --message-color: #FF5733;
       --progress-bg: #d3d3d3;
       --progress-fill: #28a745;
     }
@@ -20,7 +21,7 @@
       --text-color: #f0f0f0;
       --button-bg: #1e88e5;
       --button-hover-bg: #1565c0;
-      --message-color: #ff9800;
+      --message-color: #FF5733;
       --progress-bg: #333;
       --progress-fill: #4caf50;
     }
@@ -121,6 +122,7 @@
         opacity: 0;
         transform: scale(0.9);
       }
+
       100% {
         opacity: 1;
         transform: scale(1);
@@ -148,6 +150,7 @@
     }
   </style>
 </head>
+
 <body data-theme="light">
   <button id="themeToggle">Switch to Dark Mode</button>
   <div class="counter-container">
@@ -196,7 +199,8 @@
           clickButton.disabled = true;
           minusButton.disabled = true;
           resetButton.disabled = false;
-          messageElement.textContent = "Jai Shree Ram Jai Hanuman";
+          messageElement.textContent = "🙏 Jai Shree Ram 🙏 Jai Hanuman 🙏";
+          messageElement.style.color = "#FF5733"; // Set color dynamically
           messageElement.classList.remove('hidden');
         }
       }
@@ -227,4 +231,5 @@
     });
   </script>
 </body>
+
 </html>
