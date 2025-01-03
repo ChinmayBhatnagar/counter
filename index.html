@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Click Counter with Progress Bar</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
   <style>
     :root {
       --bg-color: #f0f0f0;
@@ -109,12 +110,10 @@
       top: 10px;
       right: 10px;
       cursor: pointer;
-      background: var(--button-bg);
-      color: white;
+      background: none;
       border: none;
-      padding: 10px 15px;
-      border-radius: 5px;
-      font-size: 0.9rem;
+      font-size: 1.5rem;
+      color: var(--text-color);
     }
 
     @keyframes fadeIn {
@@ -141,7 +140,7 @@
 
       #themeToggle {
         padding: 8px 12px;
-        font-size: 0.8rem;
+        font-size: 1.2rem;
       }
 
       .counter-container {
@@ -152,7 +151,7 @@
 </head>
 
 <body data-theme="light">
-  <button id="themeToggle">Switch to Dark Mode</button>
+  <button id="themeToggle"><i class="ri-sun-line"></i></button>
   <div class="counter-container">
     <h1>Hanuman Chalisa Count</h1>
     <p id="counter">0</p>
@@ -167,6 +166,7 @@
   <script>
     const body = document.body;
     const themeToggle = document.getElementById('themeToggle');
+    const icon = themeToggle.querySelector('i');
     const counterElement = document.getElementById('counter');
     const clickButton = document.getElementById('clickButton');
     const minusButton = document.getElementById('minusButton');
@@ -180,7 +180,7 @@
       const currentTheme = body.getAttribute('data-theme');
       const newTheme = currentTheme === 'light' ? 'dark' : 'light';
       body.setAttribute('data-theme', newTheme);
-      themeToggle.textContent = newTheme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode';
+      icon.className = newTheme === 'light' ? 'ri-sun-line' : 'ri-moon-line';
     });
 
     const updateProgressBar = () => {
