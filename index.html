@@ -151,7 +151,7 @@
 </head>
 
 <body data-theme="light">
-  <button id="themeToggle"><i class="ri-sun-line"></i></button>
+  <button id="themeToggle"><i class="ri-moon-line"></i></button>
   <div class="counter-container">
     <h1>Hanuman Chalisa Count</h1>
     <p id="counter">0</p>
@@ -180,7 +180,7 @@
       const currentTheme = body.getAttribute('data-theme');
       const newTheme = currentTheme === 'light' ? 'dark' : 'light';
       body.setAttribute('data-theme', newTheme);
-      icon.className = newTheme === 'light' ? 'ri-sun-line' : 'ri-moon-line';
+      icon.className = newTheme === 'light' ? 'ri-moon-line' : 'ri-sun-line';
     });
 
     const updateProgressBar = () => {
