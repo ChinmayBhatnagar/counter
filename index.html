@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Click Counter</title>
+  <title>Click Counter with Progress Bar</title>
   <style>
     :root {
       --bg-color: #f0f0f0;
@@ -11,6 +11,8 @@
       --button-bg: #007bff;
       --button-hover-bg: #0056b3;
       --message-color: #ff4500;
+      --progress-bg: #d3d3d3;
+      --progress-fill: #28a745;
     }
 
     [data-theme="dark"] {
@@ -19,6 +21,8 @@
       --button-bg: #1e88e5;
       --button-hover-bg: #1565c0;
       --message-color: #ff9800;
+      --progress-bg: #333;
+      --progress-fill: #4caf50;
     }
 
     body {
@@ -47,6 +51,22 @@
     #counter {
       font-size: 2.5rem;
       margin: 20px 0;
+    }
+
+    .progress-bar {
+      position: relative;
+      background: var(--progress-bg);
+      height: 20px;
+      border-radius: 10px;
+      margin: 20px 0;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      background: var(--progress-fill);
+      height: 100%;
+      width: 0%;
+      transition: width 0.3s ease;
     }
 
     button {
@@ -107,7 +127,6 @@
       }
     }
 
-    /* Responsive Design */
     @media (max-width: 600px) {
       button {
         font-size: 0.9rem;
@@ -134,6 +153,9 @@
   <div class="counter-container">
     <h1>Hanuman Chalisa Count</h1>
     <p id="counter">0</p>
+    <div class="progress-bar">
+      <div class="progress-bar-fill"></div>
+    </div>
     <div id="message" class="hidden"></div>
     <button id="clickButton">Click Me</button>
     <button id="minusButton" disabled>-1</button>
@@ -147,10 +169,10 @@
     const minusButton = document.getElementById('minusButton');
     const resetButton = document.getElementById('resetButton');
     const messageElement = document.getElementById('message');
+    const progressBarFill = document.querySelector('.progress-bar-fill');
 
     let count = 0;
 
-    // Theme toggle functionality
     themeToggle.addEventListener('click', () => {
       const currentTheme = body.getAttribute('data-theme');
       const newTheme = currentTheme === 'light' ? 'dark' : 'light';
@@ -158,52 +180,50 @@
       themeToggle.textContent = newTheme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode';
     });
 
-    // Click button functionality
+    const updateProgressBar = () => {
+      const percentage = (count / 50) * 100;
+      progressBarFill.style.width = `${percentage}%`;
+    };
+
     clickButton.addEventListener('click', () => {
       if (count < 50) {
         count++;
         counterElement.textContent = count;
+        updateProgressBar();
 
-        // Enable minus button if count > 0
-        if (count > 0) {
-          minusButton.disabled = false;
-        }
-
+        if (count > 0) minusButton.disabled = false;
         if (count === 50) {
           clickButton.disabled = true;
           minusButton.disabled = true;
           resetButton.disabled = false;
-
-          // Display the message with animation
           messageElement.textContent = "Jai Shree Ram Jai Hanuman";
           messageElement.classList.remove('hidden');
         }
       }
     });
 
-    // Minus button functionality
     minusButton.addEventListener('click', () => {
       if (count > 0) {
         count--;
         counterElement.textContent = count;
+        updateProgressBar();
 
-        // Disable minus button if count == 0
-        if (count === 0) {
-          minusButton.disabled = true;
+        if (count === 0) minusButton.disabled = true;
+        if (count < 50) {
+          clickButton.disabled = false;
+          messageElement.classList.add('hidden');
         }
       }
     });
 
-    // Reset button functionality
     resetButton.addEventListener('click', () => {
-      if (count === 50) {
-        count = 0;
-        counterElement.textContent = count;
-        clickButton.disabled = false;
-        minusButton.disabled = true;
-        resetButton.disabled = true;
-        messageElement.classList.add('hidden');
-      }
+      count = 0;
+      counterElement.textContent = count;
+      updateProgressBar();
+      clickButton.disabled = false;
+      minusButton.disabled = true;
+      resetButton.disabled = true;
+      messageElement.classList.add('hidden');
     });
   </script>
 </body>
